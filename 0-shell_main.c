@@ -1,11 +1,12 @@
 #include "shell.h"
 
 /**
- * shell process
- * 	1. prompt <-----
- * 	2. input       |
- * 	3. parse       |
- * 	4. execute -----
+ * main - function that starts the shell
+ *
+ * argc: argument count
+ * argv: character array passed to the main function
+ *
+ * Return: 1 on success
  */
 
 int main (int argc __attribute__((unused)),
