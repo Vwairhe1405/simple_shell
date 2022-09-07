@@ -52,8 +52,7 @@ char *_getline(void)
 			buffer = _realloc(buffer, READ_BUF, bufSize);
 			if (!buffer)
 			{
-				perror("Failed to re-allocate
-					a space in the memory");
+				perror("Failed to re-allocate a space in the memory");
 				exit(EXIT_FAILURE);
 			}
 		}
