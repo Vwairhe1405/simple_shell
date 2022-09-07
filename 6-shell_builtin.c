@@ -1,5 +1,9 @@
 #include "shell.h"
 
+/**
+ * env - set enviroment
+ * @command: command entered
+ */
 void env(char **command __attribute__((unused)))
 {
 	int i = 0;
@@ -11,11 +15,19 @@ void env(char **command __attribute__((unused)))
 	}
 }
 
+/**
+ * quit - quit environment
+ * @command: command entered
+ */
 void quit(char **command)
-	{
+{
 	(void) command;
 }
 
+/**
+ * ch_dir - change directory
+ * @command: command entered
+ */
 void ch_dir(char **command)
 {
 	(void) command;

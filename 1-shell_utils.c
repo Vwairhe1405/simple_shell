@@ -1,5 +1,9 @@
 #include "shell.h"
 
+/**
+ * ctrl_C - handles signal called by CTRL-C
+ * @signum: signal number
+ */
 void ctrl_C(int signum)
 {
 	if (signum == SIGINT)
@@ -16,8 +20,7 @@ char *_getline(void)
 {
 	int bufSize = READ_BUF, no_read, position = 0;
 
-	char *buffer = malloc(bufSize * sizeof(char));
-	char c;
+	char c, *buffer = malloc(bufSize * sizeof(char));
 
 	if (buffer == NULL)
 	{
@@ -29,9 +32,6 @@ char *_getline(void)
 		no_read = read(STDIN_FILENO, &c, 1);
 		if (c == EOF || !no_read)
 		{
-			/* checks if the input is EOT 
-			 	(ctrl+D) and if it is from the terminal
-			*/
 			if (isatty(STDIN_FILENO) == 1)
 			{
 				print("\n", STDIN_FILENO);
@@ -46,14 +46,14 @@ char *_getline(void)
 		else
 			buffer[position] = c;
 		position++;
-
 		if (position >= bufSize)
 		{
 			bufSize += READ_BUF;
 			buffer = _realloc(buffer, READ_BUF, bufSize);
 			if (!buffer)
 			{
-				perror("Failed to re-allocate a space in the memory");
+				perror("Failed to re-allocate
+					a space in the memory");
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -122,6 +122,7 @@ char **tokenize(char *str, const char *delim)
 int is_delimeter(const char *delimeters, char c)
 {
 	int i = 0;
+
 	if (!delimeters)
 		return (0);
 	while (delimeters[i])
@@ -133,6 +134,12 @@ int is_delimeter(const char *delimeters, char c)
 	return (0);
 }
 
+/**
+ * shell_execute - executes commands
+ * @cmd_type:command type
+ * @command: string to check
+ * Return: commands
+ */
 void shell_execute(char **command, int cmd_type)
 {
 	int stat;
@@ -158,6 +165,12 @@ void shell_execute(char **command, int cmd_type)
 		execute(command, cmd_type);
 }
 
+/**
+ * check_command - checks command
+ * @command: string to check
+ *
+ * Return: command checked
+ */
 int check_command(char *command)
 {
 	int i = 0;
@@ -179,9 +192,13 @@ int check_command(char *command)
 	}
 
 	return (INVALID_CMD);
-	
 }
 
+/**
+ * execute - execute commands
+ * @cmd_type: type of command
+ * @commands: string to check
+ */
 
 void execute(char **commands, int cmd_type)
 {
